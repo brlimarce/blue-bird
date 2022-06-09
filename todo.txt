@@ -1,0 +1,8 @@
+** TODO List
+- Post for user (CRUD)
+- Post for friends (R)
+- Friend requests
+- Search for a user
+- Redirect to login page after registration.
+- Redirect to feed after login.
+- [OPTIONAL] Implement display password.

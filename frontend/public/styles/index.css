@@ -32,3 +32,30 @@ body {
 .signup #email-address, .login input {
     width: 102%;
 }
+
+/* -- Feed */
+.feed img {
+    height: 1.6rem;
+    width: 1.6rem;
+}
+
+.footer {
+    text-align: center;
+}
+
+.footer .header {
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.cta-post button {
+    text-align: left;
+}
+
+.cta-post button:hover {
+    opacity: 0.5;
+}
+
+.post-desc {
+    text-align: justify;
+}

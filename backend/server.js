@@ -17,6 +17,7 @@ mongoose.connect(
 
 // Register the models.
 import User from './models/user.js';
+import Post from './models/post.js';
 
 // Initialize the server.
 const app = express();

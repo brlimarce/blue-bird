@@ -4,8 +4,6 @@
  * register an existing user.
  */
 import React, { Component } from 'react';
-import { Navigate } from 'react-router-dom';
-
 import AuthForm from '../components/AuthForm';
 import Field from '../components/Field';
 
@@ -25,7 +23,7 @@ export default class Signup extends Component {
                 pass: 'password',
                 confirmPass: 'confirm-password'
             },
-
+            
             invalidTag: 'is-invalid'
         };
 
@@ -148,7 +146,7 @@ export default class Signup extends Component {
                     
                     // Redirect to the login page.
                     setTimeout(() => {
-                        return (<Navigate to='/login' />);
+                        window.location = '/login';
                     }, 2000);
                 } else
                     displayError(body.message);
@@ -179,7 +177,7 @@ export default class Signup extends Component {
                     <div className='col-4'>
                         <AuthForm 
                             header={'Sign up.'}
-                            description={'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'}
+                            description={'Be a fellow bird by joining the community! Receive the latest news and trends all over the globe.'}
 
                             inputFields={
                                 <div>

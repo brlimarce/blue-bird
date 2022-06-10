@@ -1,8 +1,12 @@
 ** TODO List
-- Post for user (CRUD)
 - Post for friends (R)
 - Friend requests
 - Search for a user
-- Redirect to login page after registration.
-- Redirect to feed after login.
+- Profile (Fetch Data)
+- Redirect to home page
+- Lift the state up for edit and add post
+
+- [OPTIONAL] Placeholder for Error (Backend)
+- [OPTIONAL] Optimize the middleware.
+- [OPTIONAL] Reload the browser after expiration.
 - [OPTIONAL] Implement display password.

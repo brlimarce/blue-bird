@@ -4,8 +4,7 @@
  * log in an existing user.
  */
 import React, { Component } from 'react';
-import { Navigate } from 'react-router-dom';
-import { displayError, displaySuccess, Toast } from '../components/CustomToast';
+import { displayError, Toast } from '../components/CustomToast';
 
 import AuthForm from '../components/AuthForm';
 import Cookies from 'universal-cookie';
@@ -106,27 +105,21 @@ export default class Login extends Component {
                         body.token,
                         {
                             path: 'localhost:3001/',
-                            age: 60 * 60,
+                            maxAge: 60 * 60,
                             sameSite: 'lax'
                     });
 
                     // Store the user's data in the local storage.
                     localStorage.setItem('firstName', body.firstName);
                     localStorage.setItem('lastName', body.lastName);
-                    localStorage.setItem('email', body.email);
 
                     // Clear the input fields.
                     Object.values(this.state.fieldIds).forEach((v) => {
                         document.getElementById(v).value = null;
                     });
 
-                    // Display a successful prompt.
-                    displaySuccess(body.message);
-
                     // Redirect to the feed.
-                    setTimeout(() => {
-                        return (<Navigate to='/' />);
-                    }, 2000);
+                    window.location = '/';
                 } else
                     displayError(body.message);
             });
@@ -144,7 +137,7 @@ export default class Login extends Component {
                     <div className='col-4'>
                         <AuthForm
                             header={'Log in.'}
-                            description={'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'}
+                            description={'Welcome back! Are you ready to check out what\'s been on the trend lately?'}
 
                             inputFields={
                                 <div>

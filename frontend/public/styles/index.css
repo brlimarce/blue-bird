@@ -48,6 +48,7 @@ body {
     text-transform: uppercase;
 }
 
+/* -- Post */
 .cta-post button {
     text-align: left;
 }
@@ -58,4 +59,19 @@ body {
 
 .post-desc {
     text-align: justify;
+}
+
+#logo-header {
+    text-decoration: none;
+}
+
+#logo-header:hover {
+    opacity: 0.9;
+    transition: 0.2s;
+}
+
+/* -- Toast */
+.Toastify__toast {
+    width: auto;
+    max-width: 40rem;
 }

@@ -1,12 +1,11 @@
 ** TODO List
-- Post for friends (R)
-- Friend requests
-- Search for a user
-- Profile (Fetch Data)
-- Redirect to home page
 - Lift the state up for edit and add post
+- Bug in display (search results)
 
+- [OPTIONAL] Remove password from user object in search.
+- [OPTIONAL] Put loading while searching.
 - [OPTIONAL] Placeholder for Error (Backend)
 - [OPTIONAL] Optimize the middleware.
 - [OPTIONAL] Reload the browser after expiration.
 - [OPTIONAL] Implement display password.
+- [OPTIONAL] Fix toaster width.

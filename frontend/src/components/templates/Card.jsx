@@ -5,7 +5,7 @@
  */
 import React from 'react';
 
-export default function CardTemplate({ cardHeader, cardBody, cardFooter }) {
+export default function Card({ cardHeader, cardBody, cardFooter }) {
     return (
         <div className='card shadow-sm border-0 mb-3'>
             {/* Start of Card Header */}

@@ -1,5 +1,5 @@
 /**
- * -- CustomToast
+ * -- Custom Toasts
  * This contains personalized messages
  * in toasts.
  */
@@ -9,6 +9,7 @@ import { toast, ToastContainer } from 'react-toastify';
 // -- Constants
 const POSITION = toast.POSITION.TOP_CENTER;
 const FOCUS = false;
+const TIME_CLOSE = 1000;
 
 // -- Prompts
 const displayError = (message) => {
@@ -30,7 +31,7 @@ const displaySuccess = (message) => {
 const Toast = () => {
     return(
         <ToastContainer
-            autoClose={2000}
+            autoClose={TIME_CLOSE}
             closeButton={false}
             theme='dark'
             draggable
@@ -38,4 +39,4 @@ const Toast = () => {
     );
 }
 
-export { displayError, displaySuccess, Toast };
+export { displayError, displaySuccess, Toast, TIME_CLOSE };

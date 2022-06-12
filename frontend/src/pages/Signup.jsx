@@ -7,7 +7,8 @@ import React, { Component } from 'react';
 import AuthForm from '../components/AuthForm';
 import Field from '../components/Field';
 
-import { displayError, displaySuccess, Toast } from '../components/CustomToast';
+import { displayError, displaySuccess, Toast, TIME_CLOSE } from '../components/templates/CustomToast';
+import { capitalizeName } from '../scripts/Helper';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default class Signup extends Component {
@@ -115,10 +116,18 @@ export default class Signup extends Component {
         
         // Prevent the webpage from reloading.
         e.preventDefault();
+
+        // Apply lowercase in email address.
+        const emailInput = document.getElementById('email-address').value.toLowerCase();
+
+        // Make the first and last name follow a capitalized format.
+        const firstNameInput = capitalizeName(document.getElementById('first-name').value);
+        const lastNameInput = capitalizeName(document.getElementById('last-name').value);
+
         const user = {
-            firstName: document.getElementById('first-name').value,
-            lastName: document.getElementById('last-name').value,
-            email: document.getElementById('email-address').value,
+            firstName: firstNameInput,
+            lastName: lastNameInput,
+            email: emailInput,
             password: document.getElementById('password').value,
             confirmPassword: document.getElementById('confirm-password').value
         };
@@ -147,7 +156,7 @@ export default class Signup extends Component {
                     // Redirect to the login page.
                     setTimeout(() => {
                         window.location = '/login';
-                    }, 2000);
+                    }, TIME_CLOSE);
                 } else
                     displayError(body.message);
             });

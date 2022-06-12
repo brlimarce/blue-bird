@@ -30,23 +30,26 @@ export default function Modal({ title, titleColor, body, btnLabel, onClickHandle
                     {/* End of Body */}
 
                     {/* Start of Footer */}
-                    <div className='modal-footer'>
-                        <button 
-                            type='button' 
-                            className='btn btn-secondary' 
-                            data-bs-dismiss='modal'
-                        >Close</button>
+                    {
+                        btnLabel?
+                        <div className='modal-footer'>
+                            <button 
+                                type='button' 
+                                className='btn btn-secondary' 
+                                data-bs-dismiss='modal'
+                            >Close</button>
 
-                        <button 
-                            type='button' 
-                            className={
-                                titleColor === 'danger'?
-                                'btn btn-danger' :
-                                'btn btn-primary' 
-                            }
-                            onClick={onClickHandler}
-                        >{btnLabel}</button>
-                    </div>
+                            <button 
+                                type='button' 
+                                className={
+                                    titleColor === 'danger'?
+                                    'btn btn-danger' :
+                                    'btn btn-primary' 
+                                }
+                                onClick={onClickHandler}
+                            >{btnLabel}</button>
+                        </div> : undefined
+                    }
                     {/* End of Footer */}
                 </div>
             </div>

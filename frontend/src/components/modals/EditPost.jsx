@@ -4,8 +4,8 @@
  * a post.
  */
 import React, { Component } from 'react';
-import { displayError, displaySuccess, Toast } from '../CustomToast';
-import Modal from '../Modal';
+import { displayError, displaySuccess, Toast, TIME_CLOSE } from '../templates/CustomToast';
+import Modal from '../templates/Modal';
 
 export default class EditPost extends Component {
     constructor(props) {
@@ -57,9 +57,6 @@ export default class EditPost extends Component {
             content: this.state.editedValue
         }
 
-        // Close the modal.
-        // window.location.reload();
-
         // Send a POST request.
         fetch(
             'http://localhost:3001/post/update',
@@ -79,13 +76,11 @@ export default class EditPost extends Component {
                     
                     // Display a successful prompt.
                     displaySuccess(body.message);
-                    
-                    // TODO: Redirect to home page.
 
-                    // // Reload the window.
-                    // setTimeout(() => {
-                    //     window.location = '/';
-                    // }, 2000);
+                    // Reload the window.
+                    setTimeout(() => {
+                        window.location = '/';
+                    }, TIME_CLOSE);
                 } else
                     displayError(body.message);
             });
@@ -98,7 +93,7 @@ export default class EditPost extends Component {
                 <Modal 
                     title={'⭐ Edit Post'}
                     body={
-                        <div class='mb-3'>
+                        <div className='mb-3'>
                             <textarea 
                                 className='form-control' 
                                 id='post-content' 

@@ -4,8 +4,8 @@
  * a post.
  */
 import React, { Component } from 'react';
-import { displayError, displaySuccess, Toast } from '../CustomToast';
-import Modal from '../Modal';
+import { displayError, displaySuccess, Toast, TIME_CLOSE } from '../templates/CustomToast';
+import Modal from '../templates/Modal';
 
 export default class CreatePost extends Component {
     constructor(props) {
@@ -49,9 +49,6 @@ export default class CreatePost extends Component {
             content: field.value
         }
 
-        // Close the modal.
-        // window.location.reload();
-
         // Send a POST request.
         fetch(
             'http://localhost:3001/post/create',
@@ -72,12 +69,10 @@ export default class CreatePost extends Component {
                     // Display a successful prompt.
                     displaySuccess(body.message);
 
-                    // TODO: Redirect to home page.
-
-                    // // Reload the window.
-                    // setTimeout(() => {
-                    //     window.location = '/';
-                    // }, 2000);
+                    // Reload the window.
+                    setTimeout(() => {
+                        window.location = '/';
+                    }, TIME_CLOSE);
                 } else
                     displayError(body.message);
             });

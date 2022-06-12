@@ -4,8 +4,8 @@
  * a post.
  */
 import React, { Component } from 'react';
-import { displayError, displaySuccess, Toast } from '../CustomToast';
-import Modal from '../Modal';
+import { displayError, displaySuccess, Toast, TIME_CLOSE } from '../templates/CustomToast';
+import Modal from '../templates/Modal';
 
 export default class DeletePost extends Component {
     constructor(props) {
@@ -43,6 +43,11 @@ export default class DeletePost extends Component {
                 if (body.success) {
                     // Display a successful prompt.
                     displaySuccess(body.message);
+
+                    // Reload the window.
+                    setTimeout(() => {
+                        window.location = '/';
+                    }, TIME_CLOSE);
                 } else
                     displayError(body.message);
             });

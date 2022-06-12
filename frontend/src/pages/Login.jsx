@@ -4,7 +4,7 @@
  * log in an existing user.
  */
 import React, { Component } from 'react';
-import { displayError, Toast } from '../components/CustomToast';
+import { displayError, Toast } from '../components/templates/CustomToast';
 
 import AuthForm from '../components/AuthForm';
 import Cookies from 'universal-cookie';
@@ -57,7 +57,7 @@ export default class Login extends Component {
     login(e) {
         // Flag to validate the fields.
         let isValid = true;
-
+        
         // Check for any invalid fields.
         Object.values(this.state.fieldIds).forEach((v) => {
             // Check if there are empty fields.
@@ -109,9 +109,11 @@ export default class Login extends Component {
                             sameSite: 'lax'
                     });
 
-                    // Store the user's data in the local storage.
+                    // Store the user's data in local storage.
                     localStorage.setItem('firstName', body.firstName);
                     localStorage.setItem('lastName', body.lastName);
+                    localStorage.setItem('email', body.email);
+                    localStorage.setItem('friendCount', body.friendCount);
 
                     // Clear the input fields.
                     Object.values(this.state.fieldIds).forEach((v) => {

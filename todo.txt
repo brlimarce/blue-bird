@@ -1,15 +1,7 @@
 ** TODO List
-- Authentication
-- Posts (CRUD)
-- Search user
-- Friend request (send, view pending, accept, reject)
-- Posts (R - Friends)
-- Remove controller.js
-
+- Posts (Update, Delete)
+- Search icon
 - Signup, error messages do not show
-- Bug in display (search results)
 
 - [OPTIONAL] Remove password from user object in search.
 - [OPTIONAL] Put loading while searching.
-- [OPTIONAL] Placeholder for Error (Backend)
-- [OPTIONAL] Fix toaster width.

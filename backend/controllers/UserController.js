@@ -96,7 +96,7 @@ const checkIfLoggedIn = (req, res) => {
     // Check if the JWT token is valid.
     const response = validateToken(req);
     if (!response.isAuthorized)
-        res.send({ isLoggedIn: false });
+        return res.send({ isLoggedIn: false });
     else {
         // Check if the user exists.
         return User.findById(response.id, (userErr, user) => {
@@ -109,8 +109,107 @@ const checkIfLoggedIn = (req, res) => {
     }
 }
 
+/**
+ * -- User
+ */
+
+// Search for the user.
+const searchUser = (req, res) => {
+    // Display a confirmation in the server.
+    console.log('GET /search received!');
+
+    // Check if the JWT token is valid.
+    const response = validateToken(req);
+    if (!response.isAuthorized)
+        return res.send({ 
+            isLoggedIn: false,
+            success: false,
+            searchResults: undefined,
+            friends: undefined
+        });
+    else {
+        // Create an object for the response.
+        var searchResult = {
+            isLoggedIn: true,
+            success: false,
+            searchResults: undefined,
+            friends: undefined
+        };
+
+        // Fetch the user's data.
+        User.findById(response.id, (err, user) => {
+            // Check if the request is successful.
+            if (err)
+                return res.send(searchResult);
+            
+            // Get the user's friends.
+            searchResult.friends = user.friends;
+
+            // Fetch the search results.
+            User.find({
+                $and: [
+                    {
+                        $or: [
+                            { firstName: {
+                                $regex: req.query.name,
+                                $options: 'i'
+                            }},
+                            { lastName: {
+                                $regex: req.query.name,
+                                $options: 'i'
+                            }},
+                        ]
+                    },
+                    { _id: { $ne: response.id } }
+                ]
+            }, (err, users) => {
+                if (err)
+                    return res.send(searchResult);
+                
+                // Get the user results.
+                searchResult.searchResults = users;
+                searchResult.success = true;
+
+                // Return the search result.
+                return res.send(searchResult);
+            });
+        });
+    }
+}
+
+// Get a user's friends.
+const displayFriends = (req, res) => {
+    // Display a confirmation in the server.
+    console.log('POST /friend/view received!');
+    
+    // Check if the JWT token is valid.
+    const response = validateToken(req);
+    if (!response.isAuthorized)
+        return res.send({ 
+            isLoggedIn: false,
+            success: false,
+            payload: undefined
+        });
+    else {
+        // Obtain a user's friends.
+        const userId = !req.body.userid? response.id : req.body.userid;
+        User.findOne({ _id: userId })
+        .populate('friends')
+        .exec((err, user) => {
+            return (
+                res.send({
+                    isLoggedIn: true,
+                    success: (err)? false : true,
+                    payload: (err)? undefined : user.friends
+                }))
+        });
+    }
+}
+
 export {
     signup,
     login,
-    checkIfLoggedIn
+    checkIfLoggedIn,
+    searchUser,
+    displayFriends
 };

@@ -536,7 +536,7 @@ const acceptRequest = (req, res) => {
                     message: NOT_AUTHORIZED
                 });
             const userId = tokenPayload.id;
-
+            
             // Accept the friend request.
             User.findByIdAndUpdate(userId, {
                 $push: { friends: [req.body.userid] },

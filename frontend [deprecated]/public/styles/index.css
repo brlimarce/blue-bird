@@ -1,5 +1,7 @@
 /**
- * -- index.css
+ * -- Index
+ * This serves as the styling file
+ * of all components.
  */
 body {
     background-color: #F7F9FD !important;
@@ -13,6 +15,10 @@ body {
     height: 100vh;
 }
 
+.auth-header {
+    margin-top: 5rem;
+}
+
 .auth-header img {
     height: 2rem;
     margin-right: 1rem;
@@ -23,8 +29,8 @@ body {
     text-align: justify;
 }
 
-#signup #email, #login input {
-    width: 103%;
+.signup #email-address, .login input {
+    width: 102%;
 }
 
 /* -- Feed */

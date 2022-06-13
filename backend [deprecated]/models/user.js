@@ -1,7 +1,7 @@
 /**
  * -- User
- * This serves as the user's
- * model schema.
+ * This serves as the model
+ * for the user.
  */
 import bcrypt from 'bcrypt';
 import mongoose from 'mongoose';
@@ -36,6 +36,8 @@ const UserSchema = new mongoose.Schema({
 
 /**
  * -- Methods
+ * This contains the needed hooks
+ * and custom methods.
  */
 
 // Hashes the password before saving the user.

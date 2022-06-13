@@ -1,0 +1,30 @@
+{
+    "name": "blue-bird-api",
+    "version": "1.0.0",
+    "description": "Serves as the backend structure of the website.",
+    "main": "server.js",
+    "type": "module",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "nodemon server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/brlimarce/blue-bird.git"
+    },
+    "author": "Bianca Raianne L. Arce",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/brlimarce/blue-bird/issues"
+    },
+    "homepage": "https://github.com/brlimarce/blue-bird#readme",
+    "dependencies": {
+        "bcrypt": "^5.0.1",
+        "cookie-parser": "^1.4.6",
+        "dotenv": "^16.0.1",
+        "express": "^4.18.1",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^6.3.6",
+        "nodemon": "^2.0.16"
+    }
+}

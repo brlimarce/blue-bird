@@ -1,10 +1,16 @@
 /**
- * -- Helper.js
- * This consists of auxiliary functions
- * for the web app.
+ * -- Helper
+ * This contains the auxiliary
+ * functions.
  */
 
-// Convert the string into a capitalized format.
+/**
+ * This converts a string into
+ * capitalized form.
+ * 
+ * @param {*} name  The name in any format.
+ * @returns {String} The name in capitalized format.
+ */
 const capitalizeName = (name) => {
     // Split the text by space.
     const names = name.split(' ');

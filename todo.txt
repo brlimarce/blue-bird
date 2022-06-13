@@ -1,11 +1,15 @@
 ** TODO List
-- Lift the state up for edit and add post
+- Authentication
+- Posts (CRUD)
+- Search user
+- Friend request (send, view pending, accept, reject)
+- Posts (R - Friends)
+- Remove controller.js
+
+- Signup, error messages do not show
 - Bug in display (search results)
 
 - [OPTIONAL] Remove password from user object in search.
 - [OPTIONAL] Put loading while searching.
 - [OPTIONAL] Placeholder for Error (Backend)
-- [OPTIONAL] Optimize the middleware.
-- [OPTIONAL] Reload the browser after expiration.
-- [OPTIONAL] Implement display password.
 - [OPTIONAL] Fix toaster width.

@@ -1,7 +1,7 @@
 /**
  * -- Post
- * This serves as the post's
- * model schema.
+ * This serves as the model
+ * for the post.
  */
 import mongoose from 'mongoose';
 

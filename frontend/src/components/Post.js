@@ -1,82 +1,189 @@
 /**
- * -- props.post.js
- * This serves as the component for
- * the user's posts.
+ * -- Post
+ * This serves as a template
+ * for the user's this.props.post.
  */
 import React from 'react';
-import { 
-    BsPencil, 
-    BsTrash 
-} from 'react-icons/bs';
+import { BsPencil, BsTrash } from 'react-icons/bs';
+import * as toast from '../scripts/Toast';
 
 import Card from './templates/Card';
 import DeletePost from './modals/DeletePost';
+import EditPost from './modals/EditPost';
 
-export default function Post(props) {
-    return (
-        <Card
-            body={
-                <div className='d-flex flex-column m-3'>
-                    {/* Start of Header */}
-                    <div className='d-flex flex-row justify-content-between'>
-                        <div className='d-flex flex-row'>
-                            <h5>
-                                <span className='badge rounded-pill bg-primary me-3'>
-                                    {props.post._author.firstName[0]}
-                                </span>
-                            </h5>
+class Post extends React.Component {
+    constructor(props) {
+        super(props);
 
-                            <div className='d-flex flex-column profile'>
-                                <h5 className='mb-1'>{props.post._author.firstName} {props.post._author.lastName}</h5>
-                                <small className='text-secondary'>{props.post.timestamp}</small>
+        // Set up the state.
+        this.state = {
+            editedValue: this.props.content
+        }
+
+        // Bind the `this` keyword.
+        this.deletePost = this.deletePost.bind(this);
+        this.editPost = this.editPost.bind(this);
+        this.handleValidation = this.handleValidation.bind(this);
+    }
+
+    // Check if there is a value in the field.
+    handleValidation(e) {
+        const tag = 'is-invalid';
+        const field = e.target;
+
+        // Check if there is content inside the textarea.
+        if (field.value)
+            field.classList.remove(tag);
+        else
+            field.classList.add(tag);
+    }
+
+    // Edit the post.
+    editPost(e) {
+         // Display an error if there is no content.
+        const field = document.getElementById('post-edit-body');
+        if (!field.value) {
+            toast.displayError('Try to add some content!');
+        } else {
+            // Create the request body to be sent.
+            const post = {
+                id: this.props.post._id,
+                content: field.value
+            };
+
+            // Send a POST request.
+            fetch(
+                'http://localhost:3001/post/update',
+                {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(post)
+                })
+                .then((response) => response.json())
+                .then((body) => {
+                    // Return to the login screen if not authorized.
+                    if (!body.isLoggedIn) {
+                        window.location = '/login';
+                        return;
+                    }
+
+                    // Check if request is successful.
+                    if (body.success) {
+                        field.value = null; // Clear the textarea.
+                        toast.displaySuccess('Your post is edited!'); // Display a successful prompt.
+    
+                        // Reload the window.
+                        setTimeout(() => {
+                            window.location = '/';
+                        }, toast.getTime());
+                    } else
+                        toast.displayError('You failed to edit the post. Try again!');
+                });
+        }
+    }
+
+    // Delete the post.
+    deletePost(e) {
+        // Create the request to be sent.
+        const post = {
+            id: this.props.post._id
+        }
+
+        // Send a POST request.
+        fetch(
+            'http://localhost:3001/post/delete',
+            {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(post)
+            })
+            .then((response) => response.json())
+            .then((body) => {
+                // Return to the login screen if not authorized.
+                if (!body.isLoggedIn) {
+                    window.location = '/login';
+                    return;
+                }
+
+                // Check if request is successful.
+                if (body.success) {
+                    toast.displaySuccess('Your post is deleted!'); // Display a successful prompt.
+
+                    // Reload the window.
+                    setTimeout(() => {
+                        window.location = '/';
+                    }, toast.getTime());
+                } else
+                    toast.displayError('You failed to delete the post. Try again!');
+            });
+    }
+
+    render() {
+        return (
+            <Card
+                body={
+                    <div className='d-flex flex-column m-3'>
+                        {/* Start of Header */}
+                        <div className='d-flex flex-row justify-content-between'>
+                            <div className='d-flex flex-row'>
+                                <h5><span className='badge rounded-pill bg-primary me-3'>{this.props.post._author.firstName[0]}</span></h5>
+                                <div className='d-flex flex-column profile'>
+                                    <h5 className='mb-1'>{this.props.post._author.firstName} {this.props.post._author.lastName}</h5>
+                                    <small className='text-secondary'>{this.props.post.timestamp}</small>
+                                </div>
                             </div>
                         </div>
+                        {/* End of Header */}
+    
+                        {/* Start of Description */}
+                        <small className='post-desc mt-3'>
+                            {this.props.post.content}
+                        </small>
+                        {/* End of Description */}
                     </div>
-                    {/* End of Header */}
+                }
 
-                    {/* Start of Description */}
-                    <small className='post-desc mt-3'>
-                        {props.post.content}
-                    </small>
-                    {/* End of Description */}
-                </div>
-            }
-
-            footer={
-                props.isOwner?
-                <div className='d-flex flex-row align-items-center justify-content-around mt-3 mb-3'>
-                    <button 
-                        type='button' 
-                        className='btn btn-outline-primary col-5'
-                        data-bs-toggle='modal' 
-                        data-bs-target='#editPostModal'
-                    >
-                        <BsPencil className='me-2' />Edit
-                    </button>
-
-                    {/* Start of Edit Post Modal */}
-                    {/* <EditPost
-                        content={post.content}
-                        id={post._id}
-                    /> */}
-                    {/* End of Edit Post Modal */}
-
-                    <button 
-                        type='button' 
-                        className='btn btn-outline-danger col-5'
-                        data-bs-toggle='modal' 
-                        data-bs-target='#deletePostModal'
-                    >
-                        <BsTrash className='me-2' />Delete
-                    </button>
-                    
-                    {/* Start of Delete Post Modal */}
-                    <DeletePost
-                        id={props.post._id}
-                    />
-                    {/* End of Delete Post Modal */}
-                </div> : undefined
-            }
-        />
-    );
+                footer={
+                    this.props.isOwner?
+                    <div>
+                        <textarea 
+                            className='form-control mt-3 mb-4' 
+                            id='post-edit-body' 
+                            rows='4'
+                            placeholder='What is on your mind right now?'
+                            onChange={this.handleValidation}
+                            onBlur={this.handleValidation}
+                            value={this.state.editedValue}
+                        ></textarea>
+    
+                        <div className='d-flex flex-column align-items-center justify-content-around mt-3 mb-3'>
+                            <button 
+                                type='button' 
+                                className='btn btn-outline-primary col-12 mb-2'
+                                onClick={this.editPost}
+                            >
+                                <BsPencil className='me-2' />Edit
+                            </button>
+    
+                            <button 
+                                type='button' 
+                                className='btn btn-outline-danger col-12'
+                                onClick={this.deletePost}
+                            >
+                                <BsTrash className='me-2' />Delete
+                            </button>
+                        </div>
+                    </div> : undefined
+                }
+            />
+        );
+    }
 }
+
+export default Post;

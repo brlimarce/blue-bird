@@ -1,5 +1,4 @@
 ** TODO List
-- Posts (Update, Delete)
 - Search icon
 - Signup, error messages do not show
 

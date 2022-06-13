@@ -137,7 +137,6 @@ class Feed extends React.Component {
                             <div className='row'>
                                 {/* Divider */}
                                 <div className='col-4'></div>
-
                                 
                                 <div className='col-4 d-flex flex-column mt-5'>
                                     {/* Start of Search Bar */}
@@ -153,6 +152,7 @@ class Feed extends React.Component {
                                                 className='form-control' 
                                                 placeholder='Search' 
                                                 aria-label='Search' 
+                                                autoComplete='off'
                                             />
                                         </div>
 

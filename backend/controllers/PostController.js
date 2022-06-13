@@ -73,7 +73,33 @@ const deletePost = (req, res) => {
     }
 }
 
+// Edit a post.
+const editPost = (req, res) => {
+     // Display a confirmation in the server.
+    console.log('POST /post/update received!');
+
+    // Check if the JWT token is valid.
+    const response = validateToken(req);
+    if (!response.isAuthorized)
+        return res.send({ 
+            isLoggedIn: false,
+            success: false
+        });
+    else {
+        // Update the current post.
+        Post.updateOne({ _id: req.body.id }, {
+            content: req.body.content
+        }, (err, output) => {
+            return res.send({ 
+                isLoggedIn: true,
+                success: (err)? false : true
+            });
+        });
+    }
+}
+
 export {
     createPost,
-    deletePost
+    deletePost,
+    editPost
 };

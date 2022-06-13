@@ -16,6 +16,7 @@ const router = (app) => {
     // -- Post
     app.post('/post/create', post.createPost);
     app.post('/post/read', friend.displayPost);
+    app.post('/post/update', post.editPost);
     app.post('/post/delete', post.deletePost);
 
     // -- User and Friends

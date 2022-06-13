@@ -62,7 +62,7 @@ class DeletePost extends React.Component {
                 {/* Start of Modal */}
                 <Modal 
                     title='⛔ Delete Post'
-                    titleColor='danger'
+                    titleColor={'danger'}
                     body={
                         <div className='text-center'>
                             Are you sure you want to delete the post? <br />

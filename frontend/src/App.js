@@ -1,4 +1,9 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { 
+    BrowserRouter,
+    Navigate,
+    Routes, 
+    Route
+} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Feed from './pages/Feed';
@@ -12,12 +17,10 @@ function App() {
         <div className='App'>
             <BrowserRouter>
                 <Routes>
-                    {/* TODO: Route for Search */}
-
                     {/* Feed */}
                     <Route
                         exact
-                        path='/'
+                        path='/feed'
                         element={<Feed />}
                     />
 
@@ -31,15 +34,22 @@ function App() {
                     {/* Log in */}
                     <Route
                         exact
-                        path='/login'
+                        path='/log-in'
                         element={<Login />}
                     />
 
                     {/* Sign up */}
                     <Route
                         exact
-                        path='/signup'
+                        path='/sign-up'
                         element={<Signup />}
+                    />
+
+                    {/* Not Found */}
+                    <Route
+                        path='*'
+                        exact
+                        element={<Navigate to='/log-in' />}
                     />
                 </Routes>
             </BrowserRouter>

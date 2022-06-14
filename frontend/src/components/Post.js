@@ -4,12 +4,14 @@
  * for the user's this.props.post.
  */
 import React from 'react';
-import { BsPencil, BsTrash } from 'react-icons/bs';
-import * as toast from '../scripts/Toast';
+import { 
+    BsGear,
+    BsPencil, 
+    BsTrash
+} from 'react-icons/bs';
 
+import * as toast from '../scripts/Toast';
 import Card from './templates/Card';
-import DeletePost from './modals/DeletePost';
-import EditPost from './modals/EditPost';
 
 class Post extends React.Component {
     constructor(props) {
@@ -17,13 +19,15 @@ class Post extends React.Component {
 
         // Set up the state.
         this.state = {
-            editedValue: this.props.content
+            editedValue: this.props.post.content,
+            isToggle: false
         }
 
         // Bind the `this` keyword.
         this.deletePost = this.deletePost.bind(this);
         this.editPost = this.editPost.bind(this);
         this.handleValidation = this.handleValidation.bind(this);
+        this.togglePost = this.togglePost.bind(this);
     }
 
     // Check if there is a value in the field.
@@ -31,11 +35,24 @@ class Post extends React.Component {
         const tag = 'is-invalid';
         const field = e.target;
 
+        // Set the state of the textarea.
+        this.setState({
+            editedValue: field.value
+        });
+
         // Check if there is content inside the textarea.
         if (field.value)
             field.classList.remove(tag);
         else
             field.classList.add(tag);
+    }
+
+    // Toggle the post's settings.
+    togglePost(e) {
+        console.log(this.state.isToggle);
+        this.setState({
+            isToggle: !this.state.isToggle
+        });
     }
 
     // Edit the post.
@@ -66,7 +83,7 @@ class Post extends React.Component {
                 .then((body) => {
                     // Return to the login screen if not authorized.
                     if (!body.isLoggedIn) {
-                        window.location = '/login';
+                        window.location = '/log-in';
                         return;
                     }
 
@@ -77,7 +94,7 @@ class Post extends React.Component {
     
                         // Reload the window.
                         setTimeout(() => {
-                            window.location = '/';
+                            window.location = '/feed';
                         }, toast.getTime());
                     } else
                         toast.displayError('You failed to edit the post. Try again!');
@@ -107,7 +124,7 @@ class Post extends React.Component {
             .then((body) => {
                 // Return to the login screen if not authorized.
                 if (!body.isLoggedIn) {
-                    window.location = '/login';
+                    window.location = '/log-in';
                     return;
                 }
 
@@ -117,7 +134,7 @@ class Post extends React.Component {
 
                     // Reload the window.
                     setTimeout(() => {
-                        window.location = '/';
+                        window.location = '/feed';
                     }, toast.getTime());
                 } else
                     toast.displayError('You failed to delete the post. Try again!');
@@ -135,7 +152,9 @@ class Post extends React.Component {
                                 <h5><span className='badge rounded-pill bg-primary me-3'>{this.props.post._author.firstName[0]}</span></h5>
                                 <div className='d-flex flex-column profile'>
                                     <h5 className='mb-1'>{this.props.post._author.firstName} {this.props.post._author.lastName}</h5>
-                                    <small className='text-secondary'>{this.props.post.timestamp}</small>
+                                    <small className='text-secondary'>
+                                        {this.props.post.timestamp}
+                                    </small>
                                 </div>
                             </div>
                         </div>
@@ -146,11 +165,27 @@ class Post extends React.Component {
                             {this.props.post.content}
                         </small>
                         {/* End of Description */}
+
+                        {
+                            this.props.isOwner?
+                            <button
+                                type='button'
+                                className={
+                                    this.state.isToggle?
+                                    'btn btn-primary col-12 mt-4' :
+                                    'btn btn-outline-secondary col-12 mt-4'
+                                }
+                                onClick={this.togglePost}
+                            >
+                                <BsGear className='me-2' />
+                                {this.state.isToggle? 'Hide Post Settings' : 'Show Post Settings' }
+                            </button> : undefined
+                        }
                     </div>
                 }
 
                 footer={
-                    this.props.isOwner?
+                    this.props.isOwner && this.state.isToggle?
                     <div>
                         <textarea 
                             className='form-control mt-3 mb-4' 

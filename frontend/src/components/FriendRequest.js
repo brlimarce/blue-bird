@@ -40,7 +40,7 @@ class FriendRequest extends React.Component {
             .then((body) => {
                 // Return to the login screen if not authorized.
                 if (!body.isLoggedIn) {
-                    window.location = '/login';
+                    window.location = '/log-in';
                     return;
                 }
 
@@ -55,7 +55,7 @@ class FriendRequest extends React.Component {
                         localStorage.setItem('friendCount', parseInt(localStorage.getItem('friendCount')) + 1);
 
                         // Reload the page.
-                        window.location = '/';
+                        window.location = '/feed';
                     }, toast.getTime());
                 } else
                     toast.displayError('There is an error in adding the user!');
@@ -84,7 +84,7 @@ class FriendRequest extends React.Component {
             .then((body) => {
                 // Return to the login screen if not authorized.
                 if (!body.isLoggedIn) {
-                    window.location = '/login';
+                    window.location = '/log-in';
                     return;
                 }
 
@@ -96,7 +96,7 @@ class FriendRequest extends React.Component {
                     // Update some data.
                     setTimeout(() => {
                         // Reload the page.
-                        window.location = '/';
+                        window.location = '/feed';
                     }, toast.getTime());
                 } else
                     toast.displayError('There is an error in reject the friend request!');

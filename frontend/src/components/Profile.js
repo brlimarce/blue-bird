@@ -50,7 +50,7 @@ class Profile extends React.Component {
             .then((body) => {
                 // Return to the login screen if not authorized.
                 if (!body.isLoggedIn) {
-                    window.location = '/login';
+                    window.location = '/log-in';
                     return;
                 }
 
@@ -90,7 +90,7 @@ class Profile extends React.Component {
             .then((body) => {
                 // Return to the login screen if not authorized.
                 if (!body.isLoggedIn) {
-                    window.location = '/login';
+                    window.location = '/log-in';
                     return;
                 }
 

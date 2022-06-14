@@ -24,12 +24,12 @@ export default function Field(props) {
                 onBlur={props.changeHandler}
             />
             
-            {/* {
+            {
                 !props.invalid?
                 <div className='invalid-feedback'>
                     {props.errorMessage}
                 </div> : undefined
-            } */}
+            }
             {/* End of Input Field */}
             
             {/* Start of Label */}

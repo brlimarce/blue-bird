@@ -22,7 +22,7 @@ dotenv.config();
 // Register the user.
 const signup = (req, res) => {
     // Display a confirmation in the server.
-    console.log('POST /signup received!');
+    console.log('POST /sign-up received!');
 
     // Create a new user.
     const newUser = new User({
@@ -44,7 +44,7 @@ const signup = (req, res) => {
 // Log in the user.
 const login = (req, res) => {
     // Display a confirmation in the server.
-    console.log('POST /login received!');
+    console.log('POST /log-in received!');
 
     // Obtain the credentials.
     const email = req.body.email.trim();
@@ -165,7 +165,6 @@ const searchUser = (req, res) => {
             }, (err, users) => {
                 if (err)
                     return res.send(searchResult);
-                
                 // Get the user results.
                 searchResult.searchResults = users;
                 searchResult.success = true;

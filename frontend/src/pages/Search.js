@@ -27,6 +27,7 @@ class Feed extends React.Component {
     }
 
     componentDidMount() {
+        console.log(this.state.searchResults);
         // Send a POST request if user is logged in.
         fetch(
             'http://localhost:3001/authenticate',
@@ -71,12 +72,16 @@ class Feed extends React.Component {
             .then((body) => {
                 // Return to the login screen if not authorized.
                 if (!body.isLoggedIn) {
-                    window.location = '/login';
+                    window.location = '/log-in';
                     return;
                 }
 
                 // Check if request is successful.
                 if (body.success) {
+                    // Clear the input field.
+                    field.value = null;
+
+                    // Set up the state.
                     this.setState({ 
                         searchResults: body.searchResults,
                         friends: body.friends
@@ -106,7 +111,7 @@ class Feed extends React.Component {
                                     <div className='d-flex flex-row align-items-center justify-content-between'>
                                         {/* Start of Header */}
                                         <a 
-                                            href='/' 
+                                            href='/feed' 
                                             className='d-flex flex-row feed mt-1' 
                                             id='logo-header'
                                         >
@@ -117,8 +122,7 @@ class Feed extends React.Component {
 
                                         {/* Start of Bar */}
                                         <a
-                                            href='/' 
-                                            onClick={() => {}}
+                                            href='/feed'
                                             className='btn btn-outline-light'
                                         >Go Back</a>
                                         {/* End of Bar */}
@@ -150,7 +154,7 @@ class Feed extends React.Component {
                                                 id='search'
                                                 type='text' 
                                                 className='form-control' 
-                                                placeholder='Search' 
+                                                placeholder='Search (e.g. John Doe)' 
                                                 aria-label='Search' 
                                                 autoComplete='off'
                                             />
@@ -166,14 +170,19 @@ class Feed extends React.Component {
 
                                     {/* Start of Search Results */}
                                     {
-                                        this.state.searchResults?
+                                        this.state.searchResults.length > 0?
                                         this.state.searchResults.map((u) => {
                                             return(
                                                 <Profile
                                                     user={u}
                                                     isFriend={this.state.friends? this.state.friends.includes(u._id) : false}
                                                 />)
-                                        }) : undefined
+                                        }) :
+                                        <img 
+                                            src='assets/empty users.png' 
+                                            alt='empty results'
+                                            className='mt-3 mb-5'
+                                        />
                                     }
                                     {/* End of Search Results */}
                                 </div>
@@ -186,7 +195,7 @@ class Feed extends React.Component {
                     </div>
                 );
             } else
-                return (<Navigate to='/login' />);
+                return (<Navigate to='/log-in' />);
         }
     }
 }

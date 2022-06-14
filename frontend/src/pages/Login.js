@@ -114,7 +114,7 @@ class Login extends React.Component {
 
            // Send a POST request.
             fetch(
-                'http://localhost:3001/login',
+                'http://localhost:3001/log-in',
                 {
                     method: 'POST',
                     headers: {
@@ -148,7 +148,7 @@ class Login extends React.Component {
                         });
                         
                         // Redirect to the feed.
-                        window.location = '/';
+                        window.location = '/feed';
                     } else
                         toast.displayError(body.message);
                 });

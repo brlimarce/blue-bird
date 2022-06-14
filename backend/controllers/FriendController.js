@@ -185,6 +185,7 @@ const displayPost = (req, res) => {
             
             // Fetch the user's posts.
             Post.find({ _author: response.id })
+            .sort({ timestamp: -1 })
             .populate('_author')
             .exec((err, posts) => {
                 if (err)
@@ -200,6 +201,7 @@ const displayPost = (req, res) => {
                 Post.find({ _author: {
                     $in: friendsList
                 }})
+                .sort({ timestamp: -1 })
                 .populate('_author')
                 .exec((err, posts) => {
                     return (

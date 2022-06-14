@@ -34,7 +34,7 @@ class Signup extends React.Component {
             errors: {
                 firstName: 'First name is required.',
                 lastName: 'Last name is required.',
-                email: undefined,
+                email: 'The e-mail is empty or has an invalid format.',
                 password: 'The password is invalid.',
                 confirmPassword: 'The passwords do not match.'
             },
@@ -67,26 +67,13 @@ class Signup extends React.Component {
             case this.state.ids.email:
                 // Check if the field has a value.
                 let isEmailValid = true;
-                if (!field.value) {
+                if (!field.value)
                     isEmailValid = false;
-                    this.setState({
-                        errors: {
-                            email: (field.value)? this.state.errors.email : 'Email is required.'
-                        }});
-                }
                 
-                // Check if the email follows the format.
-                if (isEmailValid) {
-                    // Check if the email follows its format.
-                    const regexp = /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/;
-                    if (!regexp.test(field.value)) {
-                        isEmailValid = false;
-                        this.setState({
-                            errors: {
-                                email: (field.value)? this.state.errors.email : 'The email is not following the correct format.'
-                            }});
-                    }
-                }
+                // Check if the email follows its format.
+                const regexp = /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/;
+                if (!regexp.test(field.value))
+                    isEmailValid = false;
 
                 // Set the flag.
                 this.setState({
@@ -195,7 +182,7 @@ class Signup extends React.Component {
 
             // Send a POST request.
             fetch(
-                'http://localhost:3001/signup',
+                'http://localhost:3001/sign-up',
                 {
                     method: 'POST',
                     headers: {
@@ -216,7 +203,7 @@ class Signup extends React.Component {
                         
                         // Redirect to the login page.
                         setTimeout(() => {
-                            window.location = '/login';
+                            window.location = '/log-in';
                         }, toast.getTime());
                     } else
                         toast.displayError('There\'s an error in signing up. Try again!');

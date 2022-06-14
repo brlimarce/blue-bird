@@ -9,8 +9,8 @@ import * as friend from './controllers/FriendController.js';
 
 const router = (app) => {
     // -- Authentication
-    app.post('/signup', user.signup);
-    app.post('/login', user.login);
+    app.post('/sign-up', user.signup);
+    app.post('/log-in', user.login);
     app.post('/authenticate', user.checkIfLoggedIn);
 
     // -- Post

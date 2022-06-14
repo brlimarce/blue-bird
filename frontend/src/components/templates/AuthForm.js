@@ -31,7 +31,7 @@ export default function AuthForm(props) {
 
                 {/* Start of Buttons */}
                 <div className='d-flex mt-4'>
-                    <a href={ isLogin? '/signup' : '/login' } className='btn btn-outline-secondary col-6 me-3'>{ isLogin? 'Sign up' : 'Log in' }</a>
+                    <a href={ isLogin? '/sign-up' : '/log-in' } className='btn btn-outline-secondary col-6 me-3'>{ isLogin? 'Sign up' : 'Log in' }</a>
                     
                     <button 
                         className='btn btn-primary col-6' 

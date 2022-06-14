@@ -1,6 +1,0 @@
-** TODO List
-- Search icon
-- Signup, error messages do not show
-
-- [OPTIONAL] Remove password from user object in search.
-- [OPTIONAL] Put loading while searching.

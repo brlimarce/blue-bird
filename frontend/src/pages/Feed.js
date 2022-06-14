@@ -256,15 +256,6 @@ class Feed extends React.Component {
 
                                     {/* Start of Posts */}
                                     {
-                                        this.state.friendPosts.length > 0?
-                                        this.state.friendPosts.map((p) => {
-                                            return (
-                                                <Post
-                                                    post={p}
-                                                />);
-                                        }) : <div></div>
-                                    }
-                                    {
                                         this.state.userPosts.length > 0?
                                         this.state.userPosts.map((p) => {
                                             return (
@@ -272,7 +263,24 @@ class Feed extends React.Component {
                                                     isOwner
                                                     post={p}
                                                 />);
-                                        }) : <div></div>
+                                        }) : undefined
+                                    }
+                                    {
+                                        this.state.friendPosts.length > 0?
+                                        this.state.friendPosts.map((p) => {
+                                            return (
+                                                <Post
+                                                    post={p}
+                                                />);
+                                        }) : undefined
+                                    }
+                                    {
+                                        this.state.friendPosts.length <= 0 && this.state.userPosts.length <= 0?
+                                        <img 
+                                            src='assets/empty posts.png' 
+                                            alt='empty results'
+                                            className='col-12 mt-3 mb-5'
+                                        /> : undefined
                                     }
                                     {/* End of Posts */}
                                 </div>

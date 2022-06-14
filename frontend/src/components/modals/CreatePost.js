@@ -55,7 +55,7 @@ class CreatePost extends React.Component {
                 .then((body) => {
                     // Return to the login screen if not authorized.
                     if (!body.isLoggedIn) {
-                        window.location = '/login';
+                        window.location = '/log-in';
                         return;
                     }
 
@@ -66,7 +66,7 @@ class CreatePost extends React.Component {
     
                         // Reload the window.
                         setTimeout(() => {
-                            window.location = '/';
+                            window.location = '/feed';
                         }, toast.getTime());
                     } else
                         toast.displayError('You failed to create a post. Try again!');
